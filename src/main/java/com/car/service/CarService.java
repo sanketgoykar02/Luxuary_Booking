@@ -1,5 +1,6 @@
 package com.car.service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,10 @@ public class CarService {
     private CarRepository carRepository;
 
     public String saveCar(Car car) {
+    	if(car.getId() == null) {
+    		car.setCreated(LocalDateTime.now());
+    	}
+    	car.setModify(LocalDateTime.now());
         carRepository.save(car);
         return "Car Successfuly saved";
     }
